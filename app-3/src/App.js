@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      food: ['ice Cream', 'pasta', 'sandwich', 'beer'],
+      filterStr: ''
+    }
+  }
+
+  updateChange(val){
+    this.setState({ filterStr: val })
+  }
+
+
+
+  render(){
+    let displayText = this.state.food
+    .filter((e, i) => e.includes(this.state.filterStr))
+  .map((e, i) => <h2 key ={i} >{e}</h2>)
+    return (
+      <div className="listBox">
+        <input onChange={ (e) => this.updateChange(e.target.value)}></input>
+        <div className="outPutBox">{displayText} </div>
+      </div>
+    )
+  }
 }
+
 
 export default App;
